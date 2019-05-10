@@ -1,0 +1,91 @@
+{
+  "name": "twitter-adapter",
+  "display_name": "Twitter",
+  "version": "0.1.0",
+  "description": "Sends tweets",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tim-hellhake/twitter-adapter.git"
+  },
+  "author": "Tim Hellhake",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/tim-hellhake/twitter-adapter/issues"
+  },
+  "homepage": "https://github.com/tim-hellhake/twitter-adapter#readme",
+  "files": [
+    "LICENSE",
+    "SHA256SUMS",
+    "index.js",
+    "twitter-adapter.js"
+  ],
+  "moziot": {
+    "api": {
+      "min": 2,
+      "max": 2
+    },
+    "plugin": true,
+    "exec": "{nodeLoader} {path}",
+    "schema": {
+      "type": "object",
+      "required": [
+        "consumer_key",
+        "consumer_secret",
+        "access_token_key",
+        "access_token_secret"
+      ],
+      "properties": {
+        "consumer_key": {
+          "type": "string",
+          "title": "The consumer key"
+        },
+        "consumer_secret": {
+          "type": "string",
+          "title": "The consumer secret"
+        },
+        "access_token_key": {
+          "type": "string",
+          "title": "The token key"
+        },
+        "access_token_secret": {
+          "type": "string",
+          "title": "The token secret"
+        },
+        "messages": {
+          "type": "array",
+          "title": "Predefined messages",
+          "items": {
+            "type": "object",
+            "title": "A predefined message",
+            "required": [
+              "name",
+              "message"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "title": "The name of the action"
+              },
+              "message": {
+                "type": "string",
+                "title": "The text of the message"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "twitter": "^1.7.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.16.0"
+  }
+}
