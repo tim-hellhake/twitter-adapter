@@ -13,13 +13,6 @@ const {
   Device,
 } = require('gateway-addon');
 
-const deviceDescription = {
-  '@context': 'https://iot.mozilla.org/schemas/',
-  '@type': ['thing'],
-  name: 'Twitter',
-  description: 'Sends tweets'
-};
-
 const notifyDescription = {
   '@type': 'NotificationAction',
   title: 'tweet',
@@ -35,20 +28,19 @@ const notifyDescription = {
 };
 
 class TwitterDevice extends Device {
-  constructor(adapter, config) {
-    super(adapter, TwitterDevice.name);
-    this.config = config;
-
-    for (const property in deviceDescription) {
-      this[property] = deviceDescription[property];
-    }
+  constructor(adapter, manifest) {
+    super(adapter, manifest.display_name);
+    this['@context'] = 'https://iot.mozilla.org/schemas/';
+    this.name = manifest.display_name;
+    this.description = manifest.description;
+    this.config = manifest.moziot.config;
 
     this.addAction(notifyDescription.title, notifyDescription);
 
     this.messages = {};
 
-    if (config.messages) {
-      for (const message of config.messages) {
+    if (this.config.messages) {
+      for (const message of this.config.messages) {
         this.messages[message.name] = message.message;
 
         const action = {
@@ -63,10 +55,10 @@ class TwitterDevice extends Device {
     }
 
     const keys = {
-      consumer_key: config.consumer_key,
-      consumer_secret: config.consumer_secret,
-      access_token_key: config.access_token_key,
-      access_token_secret: config.access_token_secret
+      consumer_key: this.config.consumer_key,
+      consumer_secret: this.config.consumer_secret,
+      access_token_key: this.config.access_token_key,
+      access_token_secret: this.config.access_token_secret
     };
 
     for (const key in keys) {
@@ -116,7 +108,7 @@ class TwitterAdapter extends Adapter {
   constructor(addonManager, manifest) {
     super(addonManager, TwitterAdapter.name, manifest.name);
     addonManager.addAdapter(this);
-    const device = new TwitterDevice(this, manifest.moziot.config);
+    const device = new TwitterDevice(this, manifest);
     this.handleDeviceAdded(device);
   }
 }
