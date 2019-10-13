@@ -23,6 +23,7 @@
     "SHA256SUMS",
     "index.js",
     "twitter-adapter.js",
+    "twitter-notifier.js",
     "manifest.json"
   ],
   "moziot": {
