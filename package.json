@@ -1,7 +1,7 @@
 {
   "name": "twitter-adapter",
   "display_name": "Twitter",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Sends tweets",
   "main": "index.js",
   "scripts": {
