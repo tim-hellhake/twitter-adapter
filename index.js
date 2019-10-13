@@ -9,4 +9,15 @@
 const TwitterAdapter = require('./twitter-adapter');
 
 module.exports =
-    (addonManager, manifest) => new TwitterAdapter(addonManager, manifest);
+  (addonManager, manifest) => {
+    new TwitterAdapter(addonManager, manifest);
+
+    try {
+      const TwitterNotifier = require('./twitter-notifier');
+      new TwitterNotifier(addonManager, manifest);
+    } catch (e) {
+      if (!(e instanceof TypeError)) {
+        console.error(e);
+      }
+    }
+  };
