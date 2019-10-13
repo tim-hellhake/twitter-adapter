@@ -1,0 +1,70 @@
+{
+  "author": "Tim Hellhake",
+  "description": "Sends tweets",
+  "gateway_specific_settings": {
+    "webthings": {
+      "exec": "{nodeLoader} {path}",
+      "primary_type": "adapter",
+      "strict_max_version": "*",
+      "strict_min_version": "0.10.0"
+    }
+  },
+  "homepage_url": "https://github.com/tim-hellhake/twitter-adapter#readme",
+  "id": "twitter-adapter",
+  "license": "MPL-2.0",
+  "manifest_version": 1,
+  "name": "Twitter",
+  "options": {
+    "schema": {
+      "properties": {
+        "access_token_key": {
+          "title": "The token key",
+          "type": "string"
+        },
+        "access_token_secret": {
+          "title": "The token secret",
+          "type": "string"
+        },
+        "consumer_key": {
+          "title": "The consumer key",
+          "type": "string"
+        },
+        "consumer_secret": {
+          "title": "The consumer secret",
+          "type": "string"
+        },
+        "messages": {
+          "items": {
+            "properties": {
+              "message": {
+                "title": "The text of the message",
+                "type": "string"
+              },
+              "name": {
+                "title": "The name of the action",
+                "type": "string"
+              }
+            },
+            "required": [
+              "name",
+              "message"
+            ],
+            "title": "A predefined message",
+            "type": "object"
+          },
+          "title": "Predefined messages",
+          "type": "array"
+        }
+      },
+      "required": [
+        "consumer_key",
+        "consumer_secret",
+        "access_token_key",
+        "access_token_secret"
+      ],
+      "type": "object"
+    }
+  },
+  "short_name": "Twitter",
+  "version": "0.1.0"
+}

@@ -22,7 +22,8 @@
     "LICENSE",
     "SHA256SUMS",
     "index.js",
-    "twitter-adapter.js"
+    "twitter-adapter.js",
+    "manifest.json"
   ],
   "moziot": {
     "api": {
