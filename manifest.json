@@ -1,70 +1,70 @@
 {
-  "author": "Tim Hellhake",
+  "manifest_version": 1,
+  "id": "twitter-adapter",
+  "name": "Twitter",
+  "short_name": "Twitter",
+  "version": "0.2.1",
   "description": "Sends tweets",
+  "homepage_url": "https://github.com/tim-hellhake/twitter-adapter#readme",
+  "license": "MPL-2.0",
+  "author": "Tim Hellhake",
   "gateway_specific_settings": {
     "webthings": {
       "exec": "{nodeLoader} {path}",
-      "primary_type": "notifier",
+      "strict_min_version": "0.10.0",
       "strict_max_version": "*",
-      "strict_min_version": "0.10.0"
+      "primary_type": "notifier"
     }
   },
-  "homepage_url": "https://github.com/tim-hellhake/twitter-adapter#readme",
-  "id": "twitter-adapter",
-  "license": "MPL-2.0",
-  "manifest_version": 1,
-  "name": "Twitter",
   "options": {
     "schema": {
-      "properties": {
-        "access_token_key": {
-          "title": "The token key",
-          "type": "string"
-        },
-        "access_token_secret": {
-          "title": "The token secret",
-          "type": "string"
-        },
-        "consumer_key": {
-          "title": "The consumer key",
-          "type": "string"
-        },
-        "consumer_secret": {
-          "title": "The consumer secret",
-          "type": "string"
-        },
-        "messages": {
-          "items": {
-            "properties": {
-              "message": {
-                "title": "The text of the message",
-                "type": "string"
-              },
-              "name": {
-                "title": "The name of the action",
-                "type": "string"
-              }
-            },
-            "required": [
-              "name",
-              "message"
-            ],
-            "title": "A predefined message",
-            "type": "object"
-          },
-          "title": "Predefined messages",
-          "type": "array"
-        }
-      },
+      "type": "object",
       "required": [
         "consumer_key",
         "consumer_secret",
         "access_token_key",
         "access_token_secret"
       ],
-      "type": "object"
+      "properties": {
+        "consumer_key": {
+          "type": "string",
+          "title": "The consumer key"
+        },
+        "consumer_secret": {
+          "type": "string",
+          "title": "The consumer secret"
+        },
+        "access_token_key": {
+          "type": "string",
+          "title": "The token key"
+        },
+        "access_token_secret": {
+          "type": "string",
+          "title": "The token secret"
+        },
+        "messages": {
+          "type": "array",
+          "title": "Predefined messages",
+          "items": {
+            "type": "object",
+            "title": "A predefined message",
+            "required": [
+              "name",
+              "message"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "title": "The name of the action"
+              },
+              "message": {
+                "type": "string",
+                "title": "The text of the message"
+              }
+            }
+          }
+        }
+      }
     }
-  },
-  "short_name": "Twitter",
-  "version": "0.2.1"
+  }
 }
