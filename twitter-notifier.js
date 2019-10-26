@@ -14,8 +14,8 @@ const {
 } = require('gateway-addon');
 
 class TwitterOutlet extends Outlet {
-  constructor(notifier, id, config) {
-    super(notifier, id);
+  constructor(notifier, config) {
+    super(notifier, TwitterOutlet.name);
     this.name = 'Twitter';
     this.config = config;
 
@@ -63,7 +63,7 @@ class TwitterNotifier extends Notifier {
 
     if (!this.outlets[TwitterNotifier.name]) {
       this.handleOutletAdded(
-        new TwitterOutlet(this, TwitterNotifier.name, manifest.moziot.config)
+        new TwitterOutlet(this, manifest.moziot.config)
       );
     }
   }
