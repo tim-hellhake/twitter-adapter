@@ -3,7 +3,7 @@
   "id": "twitter-adapter",
   "name": "Twitter",
   "short_name": "Twitter",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Sends tweets",
   "homepage_url": "https://github.com/tim-hellhake/twitter-adapter#readme",
   "license": "MPL-2.0",
