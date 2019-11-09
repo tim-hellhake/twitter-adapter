@@ -6,12 +6,9 @@
 
 'use strict';
 
-const Twitter = require('twitter');
+import Twitter from 'twitter';
 
-const {
-  Adapter,
-  Device,
-} = require('gateway-addon');
+import { Adapter, Device } from 'gateway-addon';
 
 const notifyDescription = {
   '@type': 'NotificationAction',
@@ -28,7 +25,11 @@ const notifyDescription = {
 };
 
 class TwitterDevice extends Device {
-  constructor(adapter, manifest) {
+  private config: any;
+  private messages: { [key: string]: string };
+  private client: Twitter;
+
+  constructor(adapter: Adapter, manifest: any) {
     super(adapter, manifest.display_name);
     this['@context'] = 'https://iot.mozilla.org/schemas/';
     this.name = manifest.display_name;
@@ -44,7 +45,7 @@ class TwitterDevice extends Device {
         this.messages[message.name] = message.message;
 
         const action = {
-          '@type': notifyDescription.type,
+          '@type': notifyDescription['@type'],
           title: message.name,
           description: notifyDescription.description
         };
@@ -54,7 +55,7 @@ class TwitterDevice extends Device {
       }
     }
 
-    const keys = {
+    const keys: any = {
       consumer_key: this.config.consumer_key,
       consumer_secret: this.config.consumer_secret,
       access_token_key: this.config.access_token_key,
@@ -70,7 +71,7 @@ class TwitterDevice extends Device {
     this.client = new Twitter(keys);
   }
 
-  async performAction(action) {
+  async performAction(action: any) {
     action.start();
 
     if (action.name === notifyDescription.title) {
@@ -88,7 +89,7 @@ class TwitterDevice extends Device {
     action.finish();
   }
 
-  async send(message) {
+  async send(message: string) {
     console.log(`Sending tweet: ${message}`);
     const tweet = {
       status: message
@@ -104,8 +105,8 @@ class TwitterDevice extends Device {
   }
 }
 
-class TwitterAdapter extends Adapter {
-  constructor(addonManager, manifest) {
+export class TwitterAdapter extends Adapter {
+  constructor(addonManager: any, manifest: any) {
     super(addonManager, TwitterAdapter.name, manifest.name);
     addonManager.addAdapter(this);
     const device = new TwitterDevice(this, manifest);

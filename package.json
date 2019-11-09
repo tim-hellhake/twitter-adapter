@@ -3,10 +3,10 @@
   "display_name": "Twitter",
   "version": "0.2.2",
   "description": "Sends tweets",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint ."
+    "build": "tsc -p ."
   },
   "repository": {
     "type": "git",
@@ -21,9 +21,9 @@
   "files": [
     "LICENSE",
     "SHA256SUMS",
-    "index.js",
-    "twitter-adapter.js",
-    "twitter-notifier.js",
+    "lib/index.js",
+    "lib/twitter-adapter.js",
+    "lib/twitter-notifier.js",
     "manifest.json"
   ],
   "moziot": {
@@ -88,7 +88,8 @@
     "twitter": "^1.7.1"
   },
   "devDependencies": {
-    "babel-eslint": "^10.0.3",
-    "eslint": "^6.6.0"
+    "@types/node": "^12.12.7",
+    "@types/twitter": "^1.7.0",
+    "typescript": "^3.7.2"
   }
 }

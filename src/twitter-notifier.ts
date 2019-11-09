@@ -6,20 +6,20 @@
 
 'use strict';
 
-const Twitter = require('twitter');
+import Twitter from 'twitter';
 
-const {
-  Notifier,
-  Outlet,
-} = require('gateway-addon');
+import { Notifier, Outlet } from 'gateway-addon';
 
 class TwitterOutlet extends Outlet {
-  constructor(notifier, config) {
+  private config: any;
+  private client: Twitter;
+
+  constructor(notifier: Notifier, config: any) {
     super(notifier, TwitterOutlet.name);
     this.name = 'Twitter';
     this.config = config;
 
-    const keys = {
+    const keys: any = {
       consumer_key: this.config.consumer_key,
       consumer_secret: this.config.consumer_secret,
       access_token_key: this.config.access_token_key,
@@ -35,11 +35,11 @@ class TwitterOutlet extends Outlet {
     this.client = new Twitter(keys);
   }
 
-  notify(title, message) {
+  notify(_title: string, message: string) {
     return this.send(message);
   }
 
-  async send(message) {
+  async send(message: string) {
     console.log(`Sending tweet: ${message}`);
     const tweet = {
       status: message
@@ -55,8 +55,9 @@ class TwitterOutlet extends Outlet {
   }
 }
 
-class TwitterNotifier extends Notifier {
-  constructor(addonManager, manifest) {
+export class TwitterNotifier extends Notifier {
+  outlets: any;
+  constructor(addonManager: any, manifest: any) {
     super(addonManager, TwitterNotifier.name, manifest.name);
 
     addonManager.addNotifier(this);
@@ -68,5 +69,3 @@ class TwitterNotifier extends Notifier {
     }
   }
 }
-
-module.exports = TwitterNotifier;
