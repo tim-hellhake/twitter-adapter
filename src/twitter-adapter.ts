@@ -113,5 +113,3 @@ export class TwitterAdapter extends Adapter {
     this.handleDeviceAdded(device);
   }
 }
-
-module.exports = TwitterAdapter;
