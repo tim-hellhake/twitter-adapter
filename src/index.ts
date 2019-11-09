@@ -12,7 +12,7 @@ export = (addonManager: any, manifest: any) => {
   new TwitterAdapter(addonManager, manifest);
 
   try {
-    const TwitterNotifier = require('./twitter-notifier');
+    const { TwitterNotifier } = require('./twitter-notifier');
     new TwitterNotifier(addonManager, manifest);
   } catch (e) {
     console.error(e);
